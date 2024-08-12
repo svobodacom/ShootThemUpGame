@@ -1,4 +1,4 @@
-// Don Silvio Copyright
+﻿// Don Silvio Copyright
 #pragma once
 
 #include "CoreMinimal.h"
@@ -27,5 +27,15 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "UI")
 	bool IsPlayerSpectating() const;
+
+	// BlueprintImplementableEvent позволяет создать Event в блюпринтах на основе данной функции
+	// Тело функции создавать не нужно!
+	UFUNCTION(BlueprintImplementableEvent, Category = "UI")
+	void OnTakeDamage();
+
+	virtual bool Initialize() override;
+
+private:
+	void OnHealthChanged(float Health, float HealthDelta);
 
 };
