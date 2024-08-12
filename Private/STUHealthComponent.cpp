@@ -1,7 +1,11 @@
  // Don Silvio Copyright
 #include "STUHealthComponent.h"
+#include "GameFramework/Actor.h"
+#include "GameFramework/Pawn.h"
+#include "GameFramework/Controller.h"
 #include "Engine/World.h"
 #include "TimerManager.h"
+#include "Camera/CameraShakeBase.h"
 
 DEFINE_LOG_CATEGORY_STATIC(LogHealthComponent, All, All);
 
@@ -20,7 +24,7 @@ void USTUHealthComponent::BeginPlay()
 
    SetHealth(MaxHealth);
 
-	AActor* ComponentOwner = GetOwner();
+	AActor* ComponentOwner = GetOwner(); 
 	if (ComponentOwner)
 	{
 		ComponentOwner->OnTakeAnyDamage.AddDynamic(this, &USTUHealthComponent::OnTakeAnyDamage);
@@ -46,6 +50,8 @@ void USTUHealthComponent::OnTakeAnyDamage(AActor* DamagedActor, float Damage, co
 		GetWorld()->GetTimerManager().SetTimer(HealTimerHandle, this, &USTUHealthComponent::HealUpdate,
 			         HealUpdateTime, true, HealDelay);
 	}
+
+	PlayCameraShake();
  }
 
 
@@ -79,4 +85,19 @@ bool USTUHealthComponent::TryToAddHealth(float HealthAmount)
 bool USTUHealthComponent::IsHealthFull() const
 {
 	return FMath::IsNearlyEqual(Health, MaxHealth);
+}
+
+
+
+void USTUHealthComponent::PlayCameraShake()
+{
+	if (IsDead()) return;
+
+	const auto Player = Cast<APawn>(GetOwner());
+	if (!Player) return;
+
+	const auto Controller = Player->GetController<APlayerController>();
+	if (!Controller || !Controller->PlayerCameraManager) return;
+
+	Controller->PlayerCameraManager->StartCameraShake(CameraShake);
 }
