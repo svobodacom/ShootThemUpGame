@@ -23,6 +23,10 @@ public:
 		FVector Location, FRotator Rotation = FRotator::ZeroRotator, FVector Scale = FVector(1.f), 
 		bool bAutoDestroy = true, bool bAutoActivate = true, ENCPoolMethod PoolingMethod = ENCPoolMethod::None, 
 		bool bPreCullCheck = true);
+
+	static UNiagaraComponent* SpawnSystemAttached(UNiagaraSystem* SystemTemplate, USceneComponent* AttachToComponent, FName AttachPointName,
+		FVector Location, FRotator Rotation, EAttachLocation::Type LocationType, bool bAutoDestroy,
+		bool bAutoActivate = true, ENCPoolMethod PoolingMethod = ENCPoolMethod::None, bool bPreCullCheck = true);
 };
 
 
