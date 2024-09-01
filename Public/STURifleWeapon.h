@@ -7,12 +7,15 @@
 
 class USTUWeaponFXComponent;
 class UNiagaraComponent;
+class UNiagaraSystem;
 class USceneComponent;
 
 class UNiagaraComponent
 {
 public:
 	void SetPaused(bool bInPaused);
+	void SetNiagaraVariableVec3(const FString& InVariableName, FVector InValue);
+	void SetNiagaraVariableFloat(const FString& InVariableName, float InValue);
 };
 
 
@@ -37,6 +40,15 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Weapon")
 	float DamageAmount = 30.0f;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX")
+	UNiagaraSystem* TraceFX;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX")
+	FString TraceTargetName = "TraceTarget";
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "VFX")
+	FString MuzzleLifetimeTargetName = "RifleMuzzleLifetime";
+
 	UPROPERTY(VisibleAnywhere, Category="VFX")
 	USTUWeaponFXComponent* WeaponFXComponent;
 
@@ -49,10 +61,9 @@ private:
 
 	UPROPERTY()
 	UNiagaraComponent* MuzzleFXComponent;
-	USceneComponent* SceneComponent;
 	
 	void MakeDamage(const FHitResult& HitResult);
 	void InitMuzzleFX();
 	void SetMuzzleFXVisibility(bool Visible);
-
+	void SpawnTraceFX(const FVector& TraceStart, const FVector& TraceEnd);
 };
