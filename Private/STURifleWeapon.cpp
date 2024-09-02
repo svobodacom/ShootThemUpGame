@@ -111,7 +111,6 @@ void ASTURifleWeapon::SetMuzzleFXVisibility(bool Visible)
 {
 	if (MuzzleFXComponent)
 	{
-		//MuzzleFXComponent->SetPaused(!Visible);
 		if (Visible)
 		{
 			MuzzleFXComponent->SetNiagaraVariableFloat(MuzzleLifetimeTargetName, 0.2f);
