@@ -12,4 +12,6 @@ class SHOOTTHEMUP_16_05_API ASTUAIController : public AAIController
 {
 	GENERATED_BODY()
 	
+protected:
+	virtual void OnPossess(APawn* InPawn) override;
 };
