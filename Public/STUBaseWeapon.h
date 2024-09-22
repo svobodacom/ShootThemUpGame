@@ -25,12 +25,13 @@ public:
 	virtual void StopFire();
 
 	void ChangeClip(); // замена обоймы
-	bool CanReload() const;
+	bool CanReload() const; 
 
 	FWeaponUIData GetUIData() const { return UIData; }
 	FAmmoData GetAmmoData() const { return CurrentAmmo; }
 
 	bool TryToAddAmmo(int32 ClipsAmount);
+	bool IsAmmoEmpty() const;
 
 protected:
 
@@ -64,7 +65,6 @@ protected:
 	void MakeHit(FHitResult& HitResult, const FVector& TraceStart, const FVector& TraceEnd);
 
 	void DecreaseAmmo(); // уменьшение боеприпасов
-	bool IsAmmoEmpty() const;
 	bool IsClipEmpty() const;
 	bool IsAmmoFull() const;
 
