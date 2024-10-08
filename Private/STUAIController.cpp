@@ -9,6 +9,8 @@ ASTUAIController::ASTUAIController()
 {
 	STUAIPereceptionComponent = CreateDefaultSubobject<USTUAIPerceptionComponent>("STUPereceptionComponent");
 	SetPerceptionComponent(*STUAIPereceptionComponent);
+
+	bWantsPlayerState = true;
 }
 
 void ASTUAIController::OnPossess(APawn* InPawn)
