@@ -1,7 +1,7 @@
 // Don Silvio Copyright
 #include "EnvQueryTest_PickupCouldBeTaken.h"
 #include "STUBasePickup.h"
-#include "EnvironmentQuery//Items/EnvQueryItemType_ActorBase.h"
+#include "EnvironmentQuery/Items/EnvQueryItemType_ActorBase.h"
 
 
 UEnvQueryTest_PickupCouldBeTaken::UEnvQueryTest_PickupCouldBeTaken(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer)
