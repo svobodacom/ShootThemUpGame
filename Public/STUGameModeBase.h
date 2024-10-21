@@ -20,6 +20,7 @@ public:
 	virtual UClass* GetDefaultPawnClassForController_Implementation(AController* InController) override;
 
 	void Killed(AController* KillerController, AController* VictimController);
+	void RespawnRequest(AController* Controller);
 
 	FGameData GetGameDate() const { return GameData; }
 	int32 GetCurrentRoundNum() const { return CurrentRound; }
@@ -52,4 +53,6 @@ private:
 	void SetPlayerColor(AController* Controller);
 
 	void LogPlayerInfo();
+
+	void StartRespawn(AController* Controller);
 };
