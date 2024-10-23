@@ -12,7 +12,7 @@
 
 DEFINE_LOG_CATEGORY_STATIC(LogSTUGameModeBase, All, All);
 
-constexpr static int32 MinRoundTimeForRespawn = 20;
+constexpr static int32 MinRoundTimeForRespawn = 10;
 
 
 ASTUGameModeBase::ASTUGameModeBase()
