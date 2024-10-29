@@ -105,7 +105,7 @@ struct FGameData
 	int32 RoundsNum = 4;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Game", meta = (ClampMin = "5", ClampMax = "400"))
-	int32 RoundTime = 40; // in seconds
+	int32 RoundTime = 60; // in seconds
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
 	FLinearColor DefaultTeamColor = FLinearColor::Red;
@@ -116,3 +116,15 @@ struct FGameData
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Game", meta = (ClampMin = "4", ClampMax = "50"))
 	int32 RespawnTime = 12; // in seconds
 };
+
+
+UENUM(BlueprintType)
+enum class ESTUMatchState : uint8
+{
+	WaitingToStart = 0,
+   InProgress,
+   Pause,
+   GameOver
+};
+
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnMatchStateChangedSignature, ESTUMatchState);
