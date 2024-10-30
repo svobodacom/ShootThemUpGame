@@ -29,6 +29,7 @@ public:
 	int32 GetRoundSecondsRemaining() const { return RoundCountDown; }
 
 	virtual bool SetPause(APlayerController* PC, FCanUnpause CanUnpauseDelegate = FCanUnpause()) override;
+	virtual bool ClearPause() override;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Game")

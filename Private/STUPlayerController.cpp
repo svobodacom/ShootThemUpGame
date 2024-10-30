@@ -1,12 +1,29 @@
 ﻿// Don Silvio Copyright
 #include "STUPlayerController.h"
 #include "STURespawnComponent.h"
-#include "Gameframework/GameModeBase.h"
+#include "STUGameModeBase.h"
 
 
 ASTUPlayerController::ASTUPlayerController()
 {
 	RespawnComponent = CreateDefaultSubobject<USTURespawnComponent>("RespawnComponent");
+}
+
+
+
+void ASTUPlayerController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (GetWorld())
+	{
+		const auto GameMode = Cast<ASTUGameModeBase>(GetWorld()->GetAuthGameMode());
+
+		if (GameMode)
+		{
+			GameMode->OnMatchStateChanged.AddUObject(this, &ASTUPlayerController::OnMatchStateChanged);
+		}
+	}
 }
 
 
@@ -35,4 +52,20 @@ void ASTUPlayerController::OnPauseGame()
 	if (!GetWorld() || !GetWorld()->GetAuthGameMode()) return;
 
 	GetWorld()->GetAuthGameMode()->SetPause(this);
+}
+
+
+
+void ASTUPlayerController::OnMatchStateChanged(ESTUMatchState State)
+{
+	if (State == ESTUMatchState::InProgress)
+	{
+		SetInputMode(FInputModeGameOnly());
+		bShowMouseCursor = false;
+	}
+	else
+	{
+		SetInputMode(FInputModeUIOnly());
+		bShowMouseCursor = true;
+	}
 }
