@@ -20,4 +20,10 @@ protected:
 	USTURespawnComponent* RespawnComponent;
 
 	virtual void OnPossess(APawn* InPawn) override;
+	virtual void SetupInputComponent() override;
+
+private:
+	void OnPauseGame();
+
+
 };
