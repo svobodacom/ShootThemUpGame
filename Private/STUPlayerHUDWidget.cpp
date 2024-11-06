@@ -5,15 +5,15 @@
 #include "STUUtils.h"
 
 
-bool USTUPlayerHUDWidget::Initialize()
+void USTUPlayerHUDWidget::NativeOnInitialized()
 {
+   Super::NativeOnInitialized();
+
    if (GetOwningPlayer())
    {
       GetOwningPlayer()->GetOnNewPawnNotifier().AddUObject(this, &USTUPlayerHUDWidget::OnNewPawn);
       OnNewPawn(GetOwningPlayerPawn());
    }
-
-   return Super::Initialize();
 }
 
 

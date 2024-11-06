@@ -1,14 +1,18 @@
 // Don Silvio Copyright
 #include "STUGameOverWidget.h"
 #include "Components/VerticalBox.h"
+#include "Components/Button.h"
 #include "STUGameModeBase.h"
 #include "STUPlayerState.h"
 #include "STUPlayerStatWidget.h"
 #include "STUUtils.h"
+#include "Kismet/GameplayStatics.h"
 
 
-bool USTUGameOverWidget::Initialize()
+void USTUGameOverWidget::NativeOnInitialized()
 {
+   Super::NativeOnInitialized();
+
    if (GetWorld())
    {
       const auto GameMode = Cast<ASTUGameModeBase>(GetWorld()->GetAuthGameMode());
@@ -18,8 +22,11 @@ bool USTUGameOverWidget::Initialize()
          GameMode->OnMatchStateChanged.AddUObject(this, &USTUGameOverWidget::OnMatchStateChanged);
       }
    }
-   
-   return Super::Initialize();
+
+   if (ResetLevelButton)
+   {
+      ResetLevelButton->OnClicked.AddDynamic(this, &USTUGameOverWidget::OnResetLevel);
+   }
 }
 
 
@@ -59,5 +66,13 @@ void USTUGameOverWidget::UpdatePlayersStat()
 
       PlayerStatBox->AddChild(PlayerStatRowWidget);
    }
+}
+
+
+
+void USTUGameOverWidget::OnResetLevel()
+{
+   const FString CurrentLevelName = UGameplayStatics::GetCurrentLevelName(this);
+   UGameplayStatics::OpenLevel(this, FName(CurrentLevelName));
 }
  
