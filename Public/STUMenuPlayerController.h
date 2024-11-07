@@ -13,5 +13,4 @@ class SHOOTTHEMUP_16_05_API ASTUMenuPlayerController : public APlayerController
 	
 protected:
 	virtual void BeginPlay() override;
-
 };
