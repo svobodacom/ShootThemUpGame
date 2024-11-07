@@ -10,7 +10,6 @@ class USkeletalMeshComponent;
 class UNiagaraSystem;
 class UNiagaraComponent;
 
-
 UCLASS()
 class SHOOTTHEMUP_16_05_API ASTUBaseWeapon : public AActor
 { 
@@ -35,7 +34,6 @@ public:
 	bool IsAmmoFull() const;
 
 protected:
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
 	USkeletalMeshComponent* WeaponMesh;
 
