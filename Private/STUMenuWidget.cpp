@@ -31,13 +31,13 @@ void USTUMenuWidget::OnStartGame()
 	const auto STUGameInstance = GetWorld()->GetGameInstance<USTUGameInstance>();
 	if (!STUGameInstance) return;
 
-	if (STUGameInstance->GetStartupLevelName().IsNone())
+	if (STUGameInstance->GetStartupLevel().LevelName.IsNone())
 	{
 		UE_LOG(LogSTUMenuWidget, Error, TEXT("Level name is NONE"));
 		return;
 	}
 
-	UGameplayStatics::OpenLevel(this, STUGameInstance->GetStartupLevelName());
+	UGameplayStatics::OpenLevel(this, STUGameInstance->GetStartupLevel().LevelName);
 }
 
 
