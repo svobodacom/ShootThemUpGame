@@ -24,14 +24,23 @@ protected:
 	UButton* QuitGameButton;
 
 	UPROPERTY(meta = (BindWidget))
-	UHorizontalBox* LevelItemsBox;
+	UHorizontalBox* LevelItemsBox ;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UUserWidget> LevelItemWidgetClass;
 
 	virtual void NativeOnInitialized() override;
 
 private:
+	TArray<USTULevelItemWidget*> LevelItemWidgets;
+
 	UFUNCTION()
 	void OnStartGame();
 
 	UFUNCTION()
 	void OnQuitGame();
+
+	void InitLevelItems();
+	void OnLevelSelected(const FLevelData& Data);
+	USTUGameInstance* GetSTUGameInstance() const;
 };
